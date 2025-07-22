@@ -46,6 +46,8 @@ function openInbox(cb) {
 let huckleBerryText = "";
 let checkAgainst =
   "<br/><br/><p>____CHECK AGAINST UNFORMATTED BELOW!____</p><br/>";
+let checkAgainstConst =
+  "<br/><br/><p>____CHECK AGAINST UNFORMATTED BELOW!____</p><br/>";
 
 // Start IMAP connection
 imap.once("ready", function () {
@@ -188,23 +190,24 @@ imap.once("ready", function () {
               }
 
               // console.log(`\n✅ Check Against Format:\n${checkAgainst}`);
-              console.log(huckleBerryText);
+              // console.log(huckleBerryText);
 
-              // transporter.sendMail(
-              //   {
-              //     from: process.env.EMAIL_USER,
-              //     to: process.env.TO_EMAIL_ONE,
-              //     subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
-              //     html: huckleBerryText + checkAgainst,
-              //   },
-              //   (error, info) => {
-              //     if (error) {
-              //       console.log(error);
-              //     } else {
-              //       console.log("Email Sent", info.response);
-              //     }
-              //   }
-              // );
+              transporter.sendMail(
+                {
+                  from: process.env.EMAIL_USER,
+                  to: process.env.TO_EMAIL_ONE,
+                  subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
+                  // html: huckleBerryText + checkAgainst,
+                  html: huckleBerryText + checkAgainstConst + body,
+                },
+                (error, info) => {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email Sent", info.response);
+                  }
+                }
+              );
             });
           });
         });
