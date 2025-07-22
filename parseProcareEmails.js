@@ -57,7 +57,7 @@ imap.once("ready", function () {
       // ["UNSEEN", ["FROM", "no-reply@procare.com"]],
       [
         "All",
-        ["FROM", "fccalizo@gmail.com"],
+        ["FROM", process.env.PROCARE_EMAIL],
         ["SUBJECT", "Daily Summary"],
         ["SENTON", formattedDate],
       ],
@@ -122,10 +122,12 @@ imap.once("ready", function () {
               // PeePee
               let peeText = null;
 
+              console.log(body);
               const peeMatch = body.match(
-                /(?=.*\bwet\b)(?=.*\bdiaper was changed\b).*?(?=\n|$)/gi
+                /(?=.*\bwet\b)(?=.*\bdiaper was changed\b)[\s\S]*?\b(?:AM|PM)\b/gim
               );
 
+              console.log(peeMatch);
               if (peeMatch) {
                 peeText = peeMatch.map((p) =>
                   p
@@ -138,7 +140,7 @@ imap.once("ready", function () {
               let pooText = null;
 
               const pooMatch = body.match(
-                /(?=.*\bbm\b)(?=.*\bdiaper was changed\b).*?(?=\n|$)/gi
+                /(?=.*\bbm\b)(?=.*\bdiaper was changed\b)[\s\S]*?\b(?:AM|PM)\b/gim
               );
 
               if (pooMatch) {
@@ -188,21 +190,21 @@ imap.once("ready", function () {
               // console.log(`\n✅ Check Against Format:\n${checkAgainst}`);
               console.log(huckleBerryText);
 
-              transporter.sendMail(
-                {
-                  from: process.env.EMAIL_USER,
-                  to: process.env.TO_EMAIL_ONE,
-                  subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
-                  html: huckleBerryText + checkAgainst,
-                },
-                (error, info) => {
-                  if (error) {
-                    console.log(error);
-                  } else {
-                    console.log("Email Sent", info.response);
-                  }
-                }
-              );
+              // transporter.sendMail(
+              //   {
+              //     from: process.env.EMAIL_USER,
+              //     to: process.env.TO_EMAIL_ONE,
+              //     subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
+              //     html: huckleBerryText + checkAgainst,
+              //   },
+              //   (error, info) => {
+              //     if (error) {
+              //       console.log(error);
+              //     } else {
+              //       console.log("Email Sent", info.response);
+              //     }
+              //   }
+              // );
             });
           });
         });
