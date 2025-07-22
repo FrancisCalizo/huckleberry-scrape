@@ -1,6 +1,7 @@
 // https://github.com/mikebevz/node-imap
 // https://www.youtube.com/watch?v=YFYQucqgvN4
 // https://nodemailer.com/extras/mailparser/#options
+// 🚀  node parseProcareEmails.js
 
 require("dotenv").config();
 
@@ -190,7 +191,7 @@ imap.once("ready", function () {
               transporter.sendMail(
                 {
                   from: process.env.EMAIL_USER,
-                  to: process.env.TO_EMAIL_TWO,
+                  to: process.env.TO_EMAIL_ONE,
                   subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
                   html: huckleBerryText + checkAgainst,
                 },
