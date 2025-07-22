@@ -75,7 +75,6 @@ imap.once("ready", function () {
         console.log("Matching Emails found: ", results.length);
 
         f.on("message", function (msg, seqno) {
-          console.log(seqno);
           msg.on("body", function (stream, info) {
             simpleParser(stream, async (err, parsed) => {
               if (err) {
@@ -124,12 +123,10 @@ imap.once("ready", function () {
               // PeePee
               let peeText = null;
 
-              console.log(body);
               const peeMatch = body.match(
                 /(?=.*\bwet\b)(?=.*\bdiaper was changed\b)[\s\S]*?\b(?:AM|PM)\b/gim
               );
 
-              console.log(peeMatch);
               if (peeMatch) {
                 peeText = peeMatch.map((p) =>
                   p
@@ -195,10 +192,9 @@ imap.once("ready", function () {
               transporter.sendMail(
                 {
                   from: process.env.EMAIL_USER,
-                  to: process.env.TO_EMAIL_ONE,
+                  to: process.env.TO_EMAIL_TWO,
                   subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
-                  // html: huckleBerryText + checkAgainst,
-                  html: huckleBerryText + checkAgainstConst + body,
+                  html: huckleBerryText + checkAgainst + "<br/><br/>" + body,
                 },
                 (error, info) => {
                   if (error) {
