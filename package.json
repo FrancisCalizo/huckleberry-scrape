@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "mailparser": "^3.7.4",
+    "node-imap": "^0.9.6",
+    "nodemailer": "^7.0.5"
+  }
+}
