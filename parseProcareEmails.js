@@ -192,7 +192,7 @@ imap.once("ready", function () {
               transporter.sendMail(
                 {
                   from: process.env.EMAIL_USER,
-                  to: process.env.TO_EMAIL_TWO,
+                  to: process.env.TO_EMAIL_ONE,
                   subject: `Primose to Huckleberry Inputs for ${formattedDate}`,
                   html: huckleBerryText + checkAgainst + "<br/><br/>" + body,
                 },
